@@ -3,6 +3,7 @@ package com.example.demo.entites;
 
 
 import java.util.Date;
+
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -13,18 +14,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
+
 @Table(name = "Acheteur")
 @Entity
 public class Acheteur {
@@ -52,35 +44,53 @@ public class Acheteur {
 	@ManyToMany(mappedBy = "acheteurs")
     private List<Annonces> annonces;
 
-	public Object getAcheteurfirstName() {
-		// TODO Auto-generated method stub
-		return null;
+
+	public String getFirstName() {
+		return firstName;
+	}
+	
+	public void setFirstName(String FirstName) {
+		this.firstName = FirstName;
+	}
+	
+
+
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setAcheteurfirstName(Object acheteurfirstName) {
-		// TODO Auto-generated method stub
-		
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
-	public String getAcheteurmail() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getMail() {
+		return mail;
 	}
 
-	public String getAcheteurtelephone() {
-		// TODO Auto-generated method stub
-		return null;
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
-	public void setAcheteurtelephone(String acheteurtelephone) {
-		// TODO Auto-generated method stub
-		
+	public String getTelephone() {
+		return telephone;
 	}
 
-	public void setAcheteurmail(String acheteurmail) {
-		// TODO Auto-generated method stub
-		
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
 	}
+
+	public Date getDate_naissance() {
+		return Date_naissance;
+	}
+
+	public void setDate_naissance(Date date_naissance) {
+		Date_naissance = date_naissance;
+	}
+	
+	
+	
+
+	
 	
 	
 

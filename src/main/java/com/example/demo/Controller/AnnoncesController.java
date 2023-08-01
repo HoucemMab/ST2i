@@ -1,11 +1,7 @@
 package com.example.demo.Controller;
 
-
-
 import java.util.List;
 
-
-import com.example.demo.Service.commentairesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,42 +16,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.entites.commentaires;
+import com.example.demo.Service.AnnoncesService;
+import com.example.demo.entites.Annonces;
 
 @CrossOrigin(origins = "http://localhost:8090")
 @RestController
 @RequestMapping("/api")
-public class commentairesContoller {
+public class AnnoncesController {
 	
 	@Autowired
-	private commentairesService commentairesServices;
+	private AnnoncesService AnnoncesService;
 
-	@PostMapping("/addcommentaires")
-	public ResponseEntity<commentaires> createcommentaires(@RequestBody commentaires commentaires) {
+	@PostMapping("/addAnnonces")
+	public ResponseEntity<Annonces> createcommentaires(@RequestBody Annonces Annonces) {
 		try {
-			commentaires _commentaires = commentairesServices.save(commentaires);
-			return new ResponseEntity<>(_commentaires, HttpStatus.CREATED);
+			Annonces _Annonces = AnnoncesService.save(Annonces);
+			return new ResponseEntity<>(_Annonces, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
-	@GetMapping("/getcommentaires")
-	public ResponseEntity<List<commentaires>> getAllcommentaires(@RequestParam(required = false) String contenu) {
+	@GetMapping("/getAnnonces")
+	public ResponseEntity<List<Annonces>> getAllAnnonces(@RequestParam(required = false) String Titre) {
 		try {
-			List<commentaires> commentaires = commentairesServices.getListCommentaire();
-			if (commentaires.isEmpty()) {
+			List<Annonces> Annonces = AnnoncesService.getListAnnonces();
+			if (Annonces.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
-			return new ResponseEntity<>(commentaires, HttpStatus.OK);
+			return new ResponseEntity<>(Annonces, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	@DeleteMapping("/commentaires/{id_commentaires}")
-	public ResponseEntity<HttpStatus> deletecommentaires(@PathVariable("id_commentaires") long id_commentaires) {
+	@DeleteMapping("/Annonces/{ID}")
+	public ResponseEntity<HttpStatus> deleteAnnonces(@PathVariable("ID") long ID) {
 		try {
-			commentairesServices.deleteCommentaire(id_commentaires);
+			AnnoncesService.deleteAnnonces(ID);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -63,14 +60,16 @@ public class commentairesContoller {
 
 	}
 
-	@PutMapping("/commentaires/{id_commentaires}")
-	public ResponseEntity<commentaires> updatecommentaires(@PathVariable("id_commentaires") long id_commentaires, @RequestBody commentaires commentaires) {
-		commentaires commentairesData = commentairesServices.updateCommentaire(commentaires, id_commentaires);
-		if (commentairesData!=null) {
-			return new ResponseEntity<>(commentairesData, HttpStatus.OK);
+	@PutMapping("/Annonces/{ID}")
+	public ResponseEntity<Annonces> updateAnnonces(@PathVariable("ID") long ID, @RequestBody Annonces Annonces) {
+		Annonces AnnoncesData = AnnoncesService.updateAnnonces(Annonces, ID);
+		if (AnnoncesData!=null) {
+			return new ResponseEntity<>(AnnoncesData, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	
 
 }

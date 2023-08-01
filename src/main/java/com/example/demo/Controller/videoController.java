@@ -1,11 +1,8 @@
 package com.example.demo.Controller;
 
-
-
 import java.util.List;
 
 
-import com.example.demo.Service.commentairesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,42 +17,42 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.entites.commentaires;
+import com.example.demo.Service.videoService;
+import com.example.demo.entites.video;
 
 @CrossOrigin(origins = "http://localhost:8090")
 @RestController
 @RequestMapping("/api")
-public class commentairesContoller {
-	
+public class videoController {
 	@Autowired
-	private commentairesService commentairesServices;
+	private videoService videoService;
 
-	@PostMapping("/addcommentaires")
-	public ResponseEntity<commentaires> createcommentaires(@RequestBody commentaires commentaires) {
+	@PostMapping("/addvideo")
+	public ResponseEntity<video> createvideo(@RequestBody video video) {
 		try {
-			commentaires _commentaires = commentairesServices.save(commentaires);
-			return new ResponseEntity<>(_commentaires, HttpStatus.CREATED);
+			video _video = videoService.save(video);
+			return new ResponseEntity<>(_video, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
-	@GetMapping("/getcommentaires")
-	public ResponseEntity<List<commentaires>> getAllcommentaires(@RequestParam(required = false) String contenu) {
+	@GetMapping("/getvideo")
+	public ResponseEntity<List<video>> getAllvideo(@RequestParam(required = false) String url) {
 		try {
-			List<commentaires> commentaires = commentairesServices.getListCommentaire();
-			if (commentaires.isEmpty()) {
+			List<video> video = videoService.getListvideo();
+			if (video.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
-			return new ResponseEntity<>(commentaires, HttpStatus.OK);
+			return new ResponseEntity<>(video, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	@DeleteMapping("/commentaires/{id_commentaires}")
-	public ResponseEntity<HttpStatus> deletecommentaires(@PathVariable("id_commentaires") long id_commentaires) {
+	@DeleteMapping("/video/{id_video}")
+	public ResponseEntity<HttpStatus> deletevideo(@PathVariable("id_video") long id_video) {
 		try {
-			commentairesServices.deleteCommentaire(id_commentaires);
+			videoService.deletevideo(id_video);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -63,14 +60,15 @@ public class commentairesContoller {
 
 	}
 
-	@PutMapping("/commentaires/{id_commentaires}")
-	public ResponseEntity<commentaires> updatecommentaires(@PathVariable("id_commentaires") long id_commentaires, @RequestBody commentaires commentaires) {
-		commentaires commentairesData = commentairesServices.updateCommentaire(commentaires, id_commentaires);
-		if (commentairesData!=null) {
-			return new ResponseEntity<>(commentairesData, HttpStatus.OK);
+	@PutMapping("/video/{id_video}")
+	public ResponseEntity<video> updatevideo(@PathVariable("id_video") long id_video, @RequestBody video video) {
+		video videoData = videoService.updatevideo(video, id_video);
+		if (videoData!=null) {
+			return new ResponseEntity<>(videoData, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
+
 
 }

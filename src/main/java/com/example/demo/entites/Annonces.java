@@ -1,6 +1,7 @@
 package com.example.demo.entites;
 
 import java.util.Date;
+
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -11,18 +12,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
+
+
 @Table(name = "Annonces")
 @Entity
 public class Annonces {
@@ -71,21 +64,47 @@ public class Annonces {
     @ManyToOne
     private Type_annonce type_annonce;
 
-	public Object getAnnocesprix() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getPrix() {
+		return prix;
 	}
 
-	public void setprix(Object annocesprix) {
-		// TODO Auto-generated method stub
-		
+	public void setPrix(String prix) {
+		this.prix = prix;
 	}
 
-	public Object getAnnoncesTitre() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getTitre() {
+		return Titre;
 	}
-    
+
+	public void setTitre(String titre) {
+		Titre = titre;
+	}
+
+	public String getDegree() {
+		return degree;
+	}
+
+	public void setDegree(String degree) {
+		this.degree = degree;
+	}
+
+	public Boolean getVisible() {
+		return visible;
+	}
+
+	public void setVisible(Boolean visible) {
+		this.visible = visible;
+	}
+
+	public Boolean getVendu() {
+		return vendu;
+	}
+
+	public void setVendu(Boolean vendu) {
+		this.vendu = vendu;
+	}
+
+	
     
     
 }

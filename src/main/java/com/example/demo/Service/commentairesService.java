@@ -1,7 +1,8 @@
 package com.example.demo.Service;
 
 import java.util.List;
-import java.util.Objects;
+
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,6 +16,10 @@ public class commentairesService implements IntcommentairesService {
 	
 	@Autowired
 	private commentairesRepository commentairesRepository;
+	
+	public String findNomCommentateurAbove(Long id_nom_commentateur) {
+        return commentairesRepository.findNomCommentateurAbove(id_nom_commentateur);
+    }
 
 
 	@Override

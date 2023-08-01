@@ -1,13 +1,8 @@
 package com.example.demo;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 
-import java.util.ArrayList;
-import java.util.List;
-import com.example.demo.Repository.commentairesRepository;
-import com.example.demo.entites.commentaires;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class St2iDemoApplication {
 

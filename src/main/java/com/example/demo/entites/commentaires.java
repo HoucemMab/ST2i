@@ -4,6 +4,8 @@ package com.example.demo.entites;
 
 import java.util.Date;
 
+
+
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -15,24 +17,19 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
 @Table (name = "commentaires")
 @Entity
 public class commentaires {
 	   @Id
 	   @GeneratedValue (strategy = GenerationType.IDENTITY )
        private long id_commentaires;
+	   private long id_commentateur;
+	   
+	   @Column (name = "nom_commentateur")
+       private String nom_commentateur;
+	   
 	   
 	   @Column (name = "contenu")
        private String contenu;
@@ -48,6 +45,32 @@ public class commentaires {
 	   
 	   @ManyToMany(mappedBy = "comment")
 		private List<Annonces> Annonces;
+
+	public String getContenu() {
+		return contenu;
+	}
+
+	public void setContenu(String contenu) {
+		this.contenu = contenu;
+	}
+
+	public String getModeration() {
+		return moderation;
+	}
+
+	public void setModeration(String moderation) {
+		this.moderation = moderation;
+	}
+	   
+	   
+	   
+	   
+	   
+	   
+
+
+	
+
 
 
    

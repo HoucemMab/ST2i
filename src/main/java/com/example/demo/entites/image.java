@@ -1,6 +1,7 @@
 package com.example.demo.entites;
 
-import java.util.ArrayList;
+
+
 import java.util.Date;
 import java.util.List;
 
@@ -12,18 +13,8 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
 @Table(name = "image")
 @Entity
 public class image {
@@ -46,10 +37,22 @@ public class image {
 	@ManyToMany(mappedBy = "images")
 	private List<Annonces> Annonces;
 
-	public static Object getimageurl() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getUrl() {
+		return url;
 	}
 
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getGroupe() {
+		return groupe;
+	}
+
+	public void setGroupe(String groupe) {
+		this.groupe = groupe;
+	}
+
+	
 	
 }

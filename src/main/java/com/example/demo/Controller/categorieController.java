@@ -1,11 +1,7 @@
 package com.example.demo.Controller;
 
-
-
 import java.util.List;
 
-
-import com.example.demo.Service.commentairesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,42 +16,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.entites.commentaires;
+import com.example.demo.Service.categorieService;
+import com.example.demo.entites.categorie;
 
 @CrossOrigin(origins = "http://localhost:8090")
 @RestController
 @RequestMapping("/api")
-public class commentairesContoller {
+public class categorieController {
 	
 	@Autowired
-	private commentairesService commentairesServices;
+	private categorieService categorieServices;
 
-	@PostMapping("/addcommentaires")
-	public ResponseEntity<commentaires> createcommentaires(@RequestBody commentaires commentaires) {
+	@PostMapping("/addcategorie")
+	public ResponseEntity<categorie> createcommentaires(@RequestBody categorie categorie) {
 		try {
-			commentaires _commentaires = commentairesServices.save(commentaires);
-			return new ResponseEntity<>(_commentaires, HttpStatus.CREATED);
+			categorie _categorie = categorieServices.save(categorie);
+			return new ResponseEntity<>(_categorie, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
-	@GetMapping("/getcommentaires")
-	public ResponseEntity<List<commentaires>> getAllcommentaires(@RequestParam(required = false) String contenu) {
+	@GetMapping("/getcategorie")
+	public ResponseEntity<List<categorie>> getAllcategorieServices(@RequestParam(required = false) String Nom) {
 		try {
-			List<commentaires> commentaires = commentairesServices.getListCommentaire();
-			if (commentaires.isEmpty()) {
+			List<categorie> categorie = categorieServices.getListcategorie();
+			if (categorie.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
-			return new ResponseEntity<>(commentaires, HttpStatus.OK);
+			return new ResponseEntity<>(categorie, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	@DeleteMapping("/commentaires/{id_commentaires}")
-	public ResponseEntity<HttpStatus> deletecommentaires(@PathVariable("id_commentaires") long id_commentaires) {
+	@DeleteMapping("/categorie/{id_categorie}")
+	public ResponseEntity<HttpStatus> deletecategorie(@PathVariable("id_categorie") long id_categorie) {
 		try {
-			commentairesServices.deleteCommentaire(id_commentaires);
+			categorieServices.deletecategorie(id_categorie);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -63,14 +60,15 @@ public class commentairesContoller {
 
 	}
 
-	@PutMapping("/commentaires/{id_commentaires}")
-	public ResponseEntity<commentaires> updatecommentaires(@PathVariable("id_commentaires") long id_commentaires, @RequestBody commentaires commentaires) {
-		commentaires commentairesData = commentairesServices.updateCommentaire(commentaires, id_commentaires);
-		if (commentairesData!=null) {
-			return new ResponseEntity<>(commentairesData, HttpStatus.OK);
+	@PutMapping("/categorie/{id_categorie}")
+	public ResponseEntity<categorie> updatecategorie(@PathVariable("id_categorie") long id_categorie, @RequestBody categorie categorie) {
+		categorie categorieData = categorieServices.updatecategorie(categorie, id_categorie);
+		if (categorieData!=null) {
+			return new ResponseEntity<>(categorieData, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
+
 
 }

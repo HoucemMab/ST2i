@@ -3,6 +3,7 @@ package com.example.demo.entites;
 
 
 import java.util.Date;
+
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -13,18 +14,9 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
+
 @Table(name = "video")
 @Entity
 public class video {
@@ -47,10 +39,31 @@ public class video {
 	@ManyToMany(mappedBy = "videos")
 	private List<Annonces> Annonces;
 
-	public static Object getvideourl() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getUrl() {
+		return url;
 	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getAlt() {
+		return alt;
+	}
+
+	public void setAlt(String alt) {
+		this.alt = alt;
+	}
+
+	public String getGroupe() {
+		return groupe;
+	}
+
+	public void setGroupe(String groupe) {
+		this.groupe = groupe;
+	}
+
+	
 	
 	
     
