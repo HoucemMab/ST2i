@@ -4,9 +4,11 @@ import java.util.List;
 
 import com.example.demo.entites.Annonceur;
 
+import javax.naming.CannotProceedException;
+
 public interface IntAnnonceurService {
 	
-	Annonceur save(Annonceur annonceur);
+	Annonceur save(Annonceur annonceur) throws CannotProceedException;
 
 	List<Annonceur> getListAnnonceur();
 

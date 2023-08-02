@@ -3,9 +3,12 @@ package com.example.demo.Controller;
 
 
 import java.util.List;
+import java.util.Optional;
 
 
+import com.example.demo.Service.AnnoncesService;
 import com.example.demo.Service.commentairesService;
+import com.example.demo.entites.Annonces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,10 +33,13 @@ public class commentairesContoller {
 	@Autowired
 	private commentairesService commentairesServices;
 
-	@PostMapping("/addcommentaires")
-	public ResponseEntity<commentaires> createcommentaires(@RequestBody commentaires commentaires) {
+	@Autowired
+	private AnnoncesService annoncesService;
+	@PostMapping("/{id}/addcommentaires")
+	public ResponseEntity<commentaires> createcommentaires(@RequestBody commentaires commentaires,@PathVariable Long id) {
 		try {
-			commentaires _commentaires = commentairesServices.save(commentaires);
+			Annonces annonce = annoncesService.getAnnoncesById(id);
+			commentaires _commentaires = commentairesServices.save(commentaires,annonce);
 			return new ResponseEntity<>(_commentaires, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

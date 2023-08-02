@@ -8,15 +8,7 @@ import java.util.Date;
 
 import java.util.List;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
-import jakarta.persistence.Column;
-
-
+import jakarta.persistence.*;
 
 
 @Table (name = "commentaires")
@@ -25,10 +17,12 @@ public class commentaires {
 	   @Id
 	   @GeneratedValue (strategy = GenerationType.IDENTITY )
        private long id_commentaires;
-	   private long id_commentateur;
+
+
+	@Column (name = "nom_commentateur")
+	private long id_commentateur;
 	   
-	   @Column (name = "nom_commentateur")
-       private String nom_commentateur;
+
 	   
 	   
 	   @Column (name = "contenu")
@@ -42,9 +36,34 @@ public class commentaires {
 	   
 	   @Column (name = "Date_creation")
        private Date Date_creation;
-	   
-	   @ManyToMany(mappedBy = "comment")
-		private List<Annonces> Annonces;
+
+
+	   @ManyToOne()
+	   @JoinColumn(name = "annonce_id")
+	   private Annonces Annonces;
+
+
+
+
+	public com.example.demo.entites.Annonces getAnnonces() {
+		return Annonces;
+	}
+
+	public void setAnnonces(com.example.demo.entites.Annonces annonces) {
+		Annonces = annonces;
+	}
+
+	public long getId_commentaires() {
+		return id_commentaires;
+	}
+
+	public void setId_commentaires(long id_commentaires) {
+		this.id_commentaires = id_commentaires;
+	}
+
+	public long getId_commentateur() {
+		return id_commentateur;
+	}
 
 	public String getContenu() {
 		return contenu;

@@ -4,9 +4,11 @@ import java.util.List;
 
 import com.example.demo.entites.Acheteur;
 
+import javax.naming.CannotProceedException;
+
 public interface IntAcheteurService {
 	
-	Acheteur save(Acheteur Acheteur);
+	Acheteur save(Acheteur Acheteur) throws CannotProceedException;
 
 	List<Acheteur> getListAcheteur();
 

@@ -2,6 +2,7 @@ package com.example.demo.Service;
 
 import java.util.List;
 
+import com.example.demo.Repository.AcheteurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ public class AnnoncesService implements IntAnnoncesService {
 	
 	@Autowired
 	private AnnoncesRepository AnnoncesRepository;
+
 
 	@Override
 	public Annonces save(Annonces Annonces) {

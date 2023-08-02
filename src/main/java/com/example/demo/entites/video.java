@@ -6,15 +6,7 @@ import java.util.Date;
 
 import java.util.List;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
-import jakarta.persistence.Column;
-
-
+import jakarta.persistence.*;
 
 
 @Table(name = "video")
@@ -36,8 +28,24 @@ public class video {
 	@Column(name = "Date_creation")
     private Date Date_creation;
 	
-	@ManyToMany(mappedBy = "videos")
-	private List<Annonces> Annonces;
+	@ManyToOne
+	private Annonces Annonces;
+
+	public Date getDate_creation() {
+		return Date_creation;
+	}
+
+	public void setDate_creation(Date date_creation) {
+		Date_creation = date_creation;
+	}
+
+	public com.example.demo.entites.Annonces getAnnonces() {
+		return Annonces;
+	}
+
+	public void setAnnonces(com.example.demo.entites.Annonces annonces) {
+		Annonces = annonces;
+	}
 
 	public String getUrl() {
 		return url;

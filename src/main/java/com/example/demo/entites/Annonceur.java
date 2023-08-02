@@ -4,25 +4,24 @@ package com.example.demo.entites;
 
 
 import java.util.Date;
+import java.util.List;
 
 
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
+@Table(name = "Annonceur")
 
 @Entity
+
 public class Annonceur {
 	
 	
 	
 	    @Id
 	    @GeneratedValue(strategy = GenerationType.AUTO)
-	    private Long id_annonceur;
+		@JsonProperty
+
+		private Long id_annonceur;
 
 	    @Column(name = "first_name")
 	    public  String firstName;
@@ -30,7 +29,7 @@ public class Annonceur {
 	    @Column(name = "last_name")
 	    private String lastName;
 
-	    @Column(name = "mail")
+	    @Column(name = "mail",unique = true)
 	    public  String mail;
 
 	    @Column(name = "password")
@@ -42,6 +41,7 @@ public class Annonceur {
 	    @Temporal(TemporalType.DATE)
 	    @Column(name = "date_naissance")
 	    private Date dateNaissance;
+
 
 		public String getFirstName() {
 			return firstName;

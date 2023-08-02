@@ -4,16 +4,8 @@ import java.util.Date;
 
 import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
 
 
 @Table(name = "Annonces")
@@ -21,6 +13,8 @@ import jakarta.persistence.Table;
 public class Annonces {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	@JsonProperty
+
 	private long ID;
 	@Column(name = "prix")
 	private String prix;
@@ -46,13 +40,13 @@ public class Annonces {
     private List<Acheteur> acheteurs;
 
     
-    @ManyToMany
+    @OneToMany
     private List<video> videos;
     
-    @ManyToMany
+    @OneToMany
     private List<image> images;
-    
-    @ManyToMany
+
+	@OneToMany(mappedBy = "Annonces", cascade = CascadeType.ALL)
     private List<commentaires> comment;
     
     @ManyToMany
@@ -104,7 +98,8 @@ public class Annonces {
 		this.vendu = vendu;
 	}
 
-	
-    
-    
+
+	public long getID() {
+		return ID;
+	}
 }

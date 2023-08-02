@@ -1,7 +1,10 @@
 package com.example.demo.Service;
 
 import java.util.List;
+import java.util.Optional;
 
+import com.example.demo.Repository.AcheteurRepository;
+import com.example.demo.entites.Acheteur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,15 +12,25 @@ import com.example.demo.Repository.AnnonceurRepository;
 import com.example.demo.entites.Annonceur;
 import com.example.demo.IntService.IntAnnonceurService;
 
+import javax.naming.CannotProceedException;
+
 @Service
 public class AnnonceurService implements IntAnnonceurService   {
 	
 	@Autowired
 	private AnnonceurRepository AnnonceurRepository;
+	@Autowired
+	private AcheteurRepository acheteurRepository;
 
 	@Override
-	public Annonceur save(Annonceur annonceur) {
-		return AnnonceurRepository.save(annonceur);
+	public Annonceur save(Annonceur annonceur) throws CannotProceedException {
+		Optional<Acheteur> acheteur = acheteurRepository.findAcheteurByMail(annonceur.getMail());
+				if(!acheteur.isPresent()){
+					return AnnonceurRepository.save(annonceur);
+
+				}else{
+					throw new CannotProceedException("Mail Already Exists");
+				}
 	}
 
 	@Override
