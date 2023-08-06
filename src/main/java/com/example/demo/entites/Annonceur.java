@@ -3,17 +3,22 @@ package com.example.demo.entites;
 
 
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 @Table(name = "Annonceur")
 
 @Entity
 
-public class Annonceur {
+public class Annonceur  implements UserDetails {
 	
 	
 	
@@ -30,7 +35,7 @@ public class Annonceur {
 	    private String lastName;
 
 	    @Column(name = "mail",unique = true)
-	    public  String mail;
+	    private   String mail;
 
 	    @Column(name = "password")
 	    private String password;
@@ -41,6 +46,7 @@ public class Annonceur {
 	    @Temporal(TemporalType.DATE)
 	    @Column(name = "date_naissance")
 	    private Date dateNaissance;
+
 
 
 		public String getFirstName() {
@@ -67,11 +73,41 @@ public class Annonceur {
 			this.mail = mail;
 		}
 
-		public String getPassword() {
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return null;
+	}
+
+	public String getPassword() {
 			return password;
 		}
 
-		public void setPassword(String password) {
+	@Override
+	public String getUsername() {
+		return this.mail;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return false;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return false;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return false;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return false;
+	}
+
+	public void setPassword(String password) {
 			this.password = password;
 		}
 
